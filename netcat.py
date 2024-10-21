@@ -39,11 +39,11 @@ class NetCat:
                     if recv_len < 4096:
                         break
 
-                    if response:                          
-                        print(response)                  
-                        buffer = input('> ')             
-                        buffer += '\n'                   
-                        self.socket.send(buffer.encode())
+                if response:                          
+                    print(response)                      
+                    buffer = input('> ')                 
+                    buffer += '\n'                       
+                    self.socket.send(buffer.encode())    
 
         except KeyboardInterrupt:
             print('User terminated.')
@@ -64,8 +64,7 @@ class NetCat:
     def handle(self, client_socket) -> None:
         if self.args.execute:
             output = execute(self.args.execute)
-            if output:
-                client_socket.send(output.encode())
+            client_socket.send(output.encode())
             
         elif self.args.upload:
             file_buffer = b''
